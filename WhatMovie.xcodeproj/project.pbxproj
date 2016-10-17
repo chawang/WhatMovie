@@ -13,9 +13,13 @@
 		E60897751DB2F695004ADC13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E60897731DB2F695004ADC13 /* LaunchScreen.storyboard */; };
 		E608977D1DB31980004ADC13 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E608977C1DB31980004ADC13 /* MoviesViewController.swift */; };
 		E6A1D4951DB36378006645D1 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A1D4941DB36378006645D1 /* MovieCell.swift */; };
+		EFAFE600E271A266D5DA3690 /* Pods_WhatMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A94D47C50F55B9EEFECB1 /* Pods_WhatMovie.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B0A94D47C50F55B9EEFECB1 /* Pods_WhatMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B27D5A66A768086F2D638615 /* Pods-WhatMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatMovie/Pods-WhatMovie.debug.xcconfig"; sourceTree = "<group>"; };
+		D62978E0BF575DCBACBC9B69 /* Pods-WhatMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhatMovie/Pods-WhatMovie.release.xcconfig"; sourceTree = "<group>"; };
 		E60897671DB2F695004ADC13 /* WhatMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E608976A1DB2F695004ADC13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E608976F1DB2F695004ADC13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -31,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFAFE600E271A266D5DA3690 /* Pods_WhatMovie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8BC9A7FED9D1C2A94D22F40D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B0A94D47C50F55B9EEFECB1 /* Pods_WhatMovie.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9296322088CD15159A29FC76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B27D5A66A768086F2D638615 /* Pods-WhatMovie.debug.xcconfig */,
+				D62978E0BF575DCBACBC9B69 /* Pods-WhatMovie.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E608975E1DB2F695004ADC13 = {
 			isa = PBXGroup;
 			children = (
 				E60897691DB2F695004ADC13 /* WhatMovie */,
 				E60897681DB2F695004ADC13 /* Products */,
+				9296322088CD15159A29FC76 /* Pods */,
+				8BC9A7FED9D1C2A94D22F40D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,9 +114,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E60897791DB2F695004ADC13 /* Build configuration list for PBXNativeTarget "WhatMovie" */;
 			buildPhases = (
+				2F78C5437442524E5E876AA3 /* [CP] Check Pods Manifest.lock */,
 				E60897631DB2F695004ADC13 /* Sources */,
 				E60897641DB2F695004ADC13 /* Frameworks */,
 				E60897651DB2F695004ADC13 /* Resources */,
+				8B7FBC4B5FE1DA5E084AFB93 /* [CP] Embed Pods Frameworks */,
+				1A211508E3D76660178B5F12 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,6 +177,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A211508E3D76660178B5F12 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhatMovie/Pods-WhatMovie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F78C5437442524E5E876AA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8B7FBC4B5FE1DA5E084AFB93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhatMovie/Pods-WhatMovie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E60897631DB2F695004ADC13 /* Sources */ = {
@@ -277,6 +352,7 @@
 		};
 		E608977A1DB2F695004ADC13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B27D5A66A768086F2D638615 /* Pods-WhatMovie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6Y54JV62R3;
@@ -290,6 +366,7 @@
 		};
 		E608977B1DB2F695004ADC13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D62978E0BF575DCBACBC9B69 /* Pods-WhatMovie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6Y54JV62R3;
