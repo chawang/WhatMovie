@@ -8,7 +8,7 @@
 
 import UIKit
 import AFNetworking
-
+import VHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -20,6 +20,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        var content = VHUDContent(.loop(1.0))
+        content.loadingText = "Loading..."
+        content.completionText = "Finished!"
+        content.shape = .round
+        content.style = .light
+        content.background = .none
+        
+        VHUD.show(content)
         
         let apiKey = "751b0b5a3f40d505720913f64e3e9a66"
         let urlstring = URL(string:"https://api.themoviedb.org/3/movie/" + endpoint + "?api_key=\(apiKey)&language=en-US")
@@ -37,6 +50,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     
                     self.movies = responseDictionary["results"] as? [NSDictionary]
                     self.tableView.reloadData()
+                    VHUD.dismiss(0.5)
                 }
             }
         });
@@ -79,6 +93,29 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        let apiKey = "751b0b5a3f40d505720913f64e3e9a66"
+        let urlstring = URL(string:"https://api.themoviedb.org/3/movie/" + endpoint + "?api_key=\(apiKey)&language=en-US")
+        let request = URLRequest(url: urlstring!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    NSLog("response: \(responseDictionary)")
+                    
+                    self.movies = responseDictionary["results"] as? [NSDictionary]
+                    self.tableView.reloadData()
+                }
+            }
+            refreshControl.endRefreshing()
+        });
+        task.resume()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
