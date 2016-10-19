@@ -7,5 +7,5 @@ target 'WhatMovie' do
 
   # Pods for WhatMovie
   pod 'AFNetworking'
-  pod 'VHUD'
+  pod 'NVActivityIndicatorView'
 end

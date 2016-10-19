@@ -8,9 +8,9 @@
 
 import UIKit
 import AFNetworking
-import VHUD
+import NVActivityIndicatorView
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NVActivityIndicatorViewable {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var networkStatusLabel: UILabel!
@@ -27,13 +27,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
-        var content = VHUDContent(.loop(3.0))
-        content.loadingText = "Loading..."
-        content.shape = .round
-        content.style = .light
-        content.background = .none
-        
-        VHUD.show(content)
+        self.networkStatusLabel.isHidden = self.networkConnected
+        NVActivityIndicatorView.DEFAULT_TYPE = .ballTrianglePath
+        startAnimating()
         
         let apiKey = "751b0b5a3f40d505720913f64e3e9a66"
         let urlstring = URL(string:"https://api.themoviedb.org/3/movie/" + endpoint + "?api_key=\(apiKey)&language=en-US")
@@ -51,14 +47,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     
                     self.movies = responseDictionary["results"] as? [NSDictionary]
                     self.tableView.reloadData()
-                    VHUD.dismiss(0.5)
+                    self.stopAnimating()
                     self.networkConnected = true
                     self.networkStatusLabel.isHidden = self.networkConnected
                 }
             } else {
                 self.networkConnected = false
                 self.networkStatusLabel.isHidden = self.networkConnected
-                VHUD.dismiss(2)
+                self.stopAnimating()
             }
         });
         task.resume()
@@ -128,6 +124,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         });
         task.resume()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -139,6 +136,4 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         detailViewController.movie = movie
     }
-    
-
 }
