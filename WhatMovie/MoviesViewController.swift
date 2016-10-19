@@ -13,8 +13,10 @@ import VHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var networkStatusLabel: UILabel!
     var movies: [NSDictionary]?
     var endpoint: String!
+    var networkConnected: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
-        var content = VHUDContent(.loop(1.0))
+        var content = VHUDContent(.loop(3.0))
         content.loadingText = "Loading..."
-        content.completionText = "Finished!"
         content.shape = .round
         content.style = .light
         content.background = .none
@@ -51,7 +52,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     self.movies = responseDictionary["results"] as? [NSDictionary]
                     self.tableView.reloadData()
                     VHUD.dismiss(0.5)
+                    self.networkConnected = true
+                    self.networkStatusLabel.isHidden = self.networkConnected
                 }
+            } else {
+                self.networkConnected = false
+                self.networkStatusLabel.isHidden = self.networkConnected
+                VHUD.dismiss(2)
             }
         });
         task.resume()
@@ -110,7 +117,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     
                     self.movies = responseDictionary["results"] as? [NSDictionary]
                     self.tableView.reloadData()
+                    self.networkConnected = true
+                    self.networkStatusLabel.isHidden = self.networkConnected
                 }
+            } else {
+                self.networkConnected = false
+                self.networkStatusLabel.isHidden = self.networkConnected
             }
             refreshControl.endRefreshing()
         });

@@ -23,7 +23,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6aw-6Q-lEg" id="60I-c0-cVJ">
-                                            <frame key="frameInset" width="342" height="138.5"/>
+                                            <frame key="frameInset" width="342" height="138"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ofe-7f-ox0">
@@ -55,11 +55,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Network Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fXb-ed-uQP">
+                                <frame key="frameInset" minY="63" width="375" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="t9X-Np-Vpq"/>
                     <connections>
+                        <outlet property="networkStatusLabel" destination="fXb-ed-uQP" id="GVw-Ws-J0K"/>
                         <outlet property="tableView" destination="7BN-lS-E0g" id="bDw-dX-CwI"/>
                     </connections>
                 </viewController>
